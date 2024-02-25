@@ -5,15 +5,27 @@ const britishOnly = require('./british-only.js')
 
 class Translator {
     convertToBritish(text){
-      let currentWord='';
-    let words= text.split(/[\s]+/);
-        let translation = '';
-       for (let x in words)
-  if (Object.keys(americanToBritishSpelling).includes(words[x])){
-translation+=americanToBritishSpelling[words[x]]+' ';
-  }else translation+=words[x]+' ';
-        return translation;
+      let regex = /\d\d\:\d\d/
+      let match = text.match(regex);
+      if(match){text = text.replace(match[0], '<span class="highlight">'+match[0].split(':').join('.')+'</span>');}
+       for (let x in americanToBritishSpelling){
+       regex = new RegExp(x, 'gi');
+       match= text.match(regex);
+       if(match==x){text = text.replace(match, '<span class="highlight">'+americanToBritishSpelling[x]+'</span>')}
+       }
+       for (let x in americanOnly){
+            regex = new RegExp('\\b'+x+'\\b', 'gi');
+            match= text.match(regex);
+            if(match==x){text = text.replace(match, '<span class="highlight">'+americanOnly[x]+'</span>')}
+            }
+            for (let x in americanToBritishTitles){
+                  regex = new RegExp(x, 'gi');
+                  match= text.match(regex);
+                  if(match==x){text = text.replace(match, '<span class="highlight">'+americanToBritishTitles[x]+'</span>')}
+                  }
+      return text.trim();
       }
+      
 
       convertToAmerican(text){
         let words= text.split(/[\s]+/);
