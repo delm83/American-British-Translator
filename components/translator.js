@@ -19,11 +19,11 @@ class Translator {
             if(match){text = text.replace(match, '<span class="highlight">'+americanOnly[x]+'</span>')}
             }
             for (let x in americanToBritishTitles){
-                  regex = new RegExp(americanToBritishTitles[x]+'\.', 'gi');
-                  match= text.match(regex);
-                  if(match==x){
-                    text = text.replace(match, '<span class="highlight">'+americanToBritishTitles[x]+'</span>')}
-                  }
+              regex = new RegExp('\\b'+americanToBritishTitles[x]+'\\.\\b', 'gi');
+              match= text.match(regex);
+              if(match){
+                text = text.replace(match, '<span class="highlight">'+americanToBritishTitles[x]+'</span>')}
+              }
       return text.trim();
       }
       
@@ -45,7 +45,7 @@ class Translator {
               for (let x in americanToBritishTitles){
                     regex = new RegExp('\\b'+americanToBritishTitles[x]+'\\b', 'gi');
                     match= text.match(regex);
-                    if(match==americanToBritishTitles[x]){
+                    if(match){
                       text = text.replace(match, '<span class="highlight">'+x+'</span>')}
                     }
         return text.trim();
@@ -53,4 +53,3 @@ class Translator {
 }
 
 module.exports = Translator;
-
