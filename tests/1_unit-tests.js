@@ -66,4 +66,19 @@ suite('Unit Tests', () => {
       test('#equal, #Translate Tea time is usually around 4 or 4.30. to American English', function () {
         assert.equal('Tea time is usually around 4 or <span class="highlight">4:30</span>.', translator.convertToAmerican('Tea time is usually around 4 or 4.30.'));
       });
+      test('#equal, #Highlight translation in Mangoes are my favorite fruit.', function () {
+        assert.equal('Tea time is usually around 4 or <span class="highlight">4:30</span>.', translator.convertToAmerican('Tea time is usually around 4 or 4.30.'));
+      });
+      test('String, #include, #Highlight translation in Mangoes are my favorite fruit.', function () {
+        assert.include(translator.convertToBritish('Mangoes are my favorite fruit.'), '<span class="highlight">favourite</span>');
+      });
+      test('String, #include, #Highlight translation in I ate yogurt for breakfast.', function () {
+        assert.include(translator.convertToBritish('I ate yogurt for breakfast.'), '<span class="highlight">yoghurt</span>');
+      });
+      test('String, #include, #Highlight translation in We watched the footie match for a while.', function () {
+        assert.include(translator.convertToAmerican('We watched the footie match for a while.'), '<span class="highlight">soccer</span>');
+      });
+      test('String, #include, #Highlight translation in Paracetamol takes up to an hour to work.', function () {
+        assert.include(translator.convertToAmerican('Paracetamol takes up to an hour to work.'), '<span class="highlight">Tylenol</span>');
+      });
 });
