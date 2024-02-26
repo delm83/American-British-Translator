@@ -19,7 +19,8 @@ class Translator {
             if(match){text = text.replace(match, '<span class="highlight">'+americanOnly[x]+'</span>')}
             }
             for (let x in americanToBritishTitles){
-              regex = new RegExp('\\b'+americanToBritishTitles[x]+'\\.\\b', 'gi');
+              regex = new RegExp('\\b'+americanToBritishTitles[x]+'\\b\\.', 'gi');
+              console.log('regex is: '+regex)
               match= text.match(regex);
               if(match){
                 text = text.replace(match, '<span class="highlight">'+americanToBritishTitles[x]+'</span>')}
