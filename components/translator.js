@@ -5,7 +5,7 @@ const britishOnly = require('./british-only.js')
 
 class Translator {
     convertToBritish(text){
-      let regex = /\d\d:\d\d/
+      let regex = /\d?\d:\d\d/gi
       let match = text.match(regex);
       if(match){text = text.replace(match[0], '<span class="highlight">'+match[0].split(':').join('.')+'</span>');}
        for (let x in americanToBritishSpelling){
@@ -29,7 +29,7 @@ class Translator {
       
 
       convertToAmerican(text){
-        let regex = /\d\d:\d\d/
+        let regex = /\d?\d\.\d\d/gi
         let match = text.match(regex);
         if(match){text = text.replace(match[0], '<span class="highlight">'+match[0].split('.').join(':')+'</span>');}
          for (let x in americanToBritishSpelling){
